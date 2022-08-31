@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -18,26 +17,31 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+//    return view('welcome');
+    return view('main_page');
 });
 
 /** auth routes */
 Route::name('user.')->group(function () {
 
-    Route::get('login', function () {
-        if(Auth::check()) {
-            return redirect(route('user.private'));
-        } else {
-            return view('login');
-        }
-    })->name('login');
+
+    Route::get('login', [LoginController::class, 'index']);
 
     Route::post('/login', [LoginController::class, 'login']);
 
-    Route::get('/logout', function() {
-        Auth::logout();
-        return redirect("/");
-    })->name('logout');
+    Route::match(array('GET','POST'),'logout',[LoginController::class, 'logout']);
+
+//    Route::post('/logout', [LoginController::class, 'logout']);
+
+
+//    Route::get('/logout', function() {
+//        Auth::logout();
+//        return redirect("/");
+//    })->name('logout');
+
+    Route::view('/private', 'private')
+        ->middleware('auth')->name('private');
+
 
     Route::get('registration', function () {
         if(Auth::check()) {

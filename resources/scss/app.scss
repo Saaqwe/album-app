@@ -1,1 +1,40 @@
+@use "sass:map";
+
+$font-sizes: (
+    7: 0.8rem
+);
+
 @import "../../node_modules/bootstrap/scss/bootstrap";
+
+// Создайте свою карту
+
+
+// Объедините карты
+//$theme-colors: map-merge($theme-colors, $custom-colors);
+
+.header{
+    height: 60px;
+    background-color: #FFDDEF;
+    display: flex;
+    align-items: center;
+    .middle-column{
+        max-width: 640px;
+        margin: auto;
+        display: flex;
+        padding: 10px;
+
+
+        .search{
+            width: 400px;
+            height: 40px;
+        }
+
+        .create-article-btn{
+            width: fit-content;
+            border-radius: 10px;
+            padding: 8px;
+            background-color: white;
+            color: black;
+        }
+    }
+}

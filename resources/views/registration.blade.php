@@ -23,6 +23,10 @@
             </div>
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Login</label>
+                <input name="login" type="text" class="form-control" id="exampleFormControlInput1">
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Email</label>
                 <input name="email" type="text" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
             </div>
             <div class="mb-3">
@@ -32,10 +36,21 @@
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </form>
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            There were some errors with your request.
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
 
 
-        <!-- Button trigger modal -->
+
+    <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Launch demo modal
         </button>

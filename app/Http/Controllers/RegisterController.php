@@ -14,7 +14,8 @@ class RegisterController extends Controller
         }
         $validateFields = $request->validate([
             'name' => 'required',
-            'email' => 'required',
+            'login' => 'required|unique:users',
+            'email' => 'required|unique:users',
             'password' => 'required'
         ]);
 
@@ -23,6 +24,13 @@ class RegisterController extends Controller
                "email" => 'Пользователь с таким email уже зарегестрирован'
             ]);
         }
+
+        if(User::where('email', $validateFields['login'])->exists()) {
+            redirect(route('user.registration'))->withErrors([
+                "email" => 'Пользователь с таким email уже зарегестрирован'
+            ]);
+        }
+
 
         $user = User::create($validateFields);
         if($user) {
@@ -36,6 +44,7 @@ class RegisterController extends Controller
         ]);
     }
 
-    public function muF () {
+    public function saveIfJsonExpected () {
+
     }
 }

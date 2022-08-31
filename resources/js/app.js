@@ -1,10 +1,12 @@
 require('./bootstrap');
-require('bootstrap');
+// window.bootstrap = require('bootstrap');
+window.bootstrap = require('bootstrap/dist/js/bootstrap.bundle.js');
+
 require('vue')
 import { createApp } from 'vue'
 import Login from "./components/Login";
 
-const app = createApp({
+const header = createApp({
     data() {
         return {
             count: 0
@@ -12,9 +14,10 @@ const app = createApp({
     },
     components: {
         'login' : Login,
+
     },
     mounted() {
     }
-}).mount('#app');
+}).mount('#header');
 
 

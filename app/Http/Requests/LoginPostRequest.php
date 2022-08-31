@@ -25,13 +25,13 @@ class LoginPostRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|email:rfc,dns',
-            'password' => [
-                'required',
-                'max:255',
-                'string',
-                Password::min(6)
-            ]
+//            'email' => 'required|email:rfc,dns',
+//            'password' => [
+//                'required',
+//                'max:255',
+//                'string',
+//                Password::min(6)
+//            ]
         ];
     }
 }

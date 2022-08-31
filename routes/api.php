@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Resources\UserResource;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -13,4 +15,10 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/profile/{id}', function ($id) {
+        return new UserResource(User::findOrFail($id));
+    });
+});
+
 
