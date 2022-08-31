@@ -15,54 +15,35 @@
                     </div>
                     <div class="modal-body">
                         <form @submit.prevent="submitForm" action="#" class="container-sm w-50 my-3">
-                            <div class="mb-3">
-                                <label class="form-label">Login</label>
+                            <div v-for="(value, inputName) in formData" class="mb-3">
+                                <label class="form-label">{{ capitalizeFirstLetter(inputName) }}</label>
                                 <input
-                                    v-model="formData.email"
                                     :class="{
-                                        'border-danger' : v.formData.email.$error
+                                        'border-danger' : v.formData[inputName].$error
                                             || vuelidateExternalResults.formatData.password.length !== 0
                                     }"
-                                    type="text" name="email"
-                                    class="form-control"
-                                    placeholder="name@example.com"
+                                    v-model="formData[inputName]"
                                     v-on:input="formInputChanged"
+                                    :type='inputName'
+                                    :name='inputName'
+                                    class="form-control"
                                 >
-                                <div class="text-danger fs-7" v-if="v.formData.email.required.$invalid">
+                                <div class="text-danger fs-7" v-if="v.formData[inputName].required.$invalid">
                                     <span>This field if required</span>
                                 </div>
-                                <div class="text-danger fs-7" v-else-if="v.formData.email.$error">
-                                    Min length is {{ v.formData.email.minLength.$params.min }}
-                                    and max length is {{ v.formData.email.maxLength.$params.max }}
+                                <div class="text-danger fs-7" v-else-if="v.formData[inputName].$error">
+                                    Min length is {{ v.formData[inputName].minLength.$params.min }}
+                                    and max length is {{ v.formData[inputName].maxLength.$params.max }}
                                 </div>
                             </div>
-                            <div class="mb-3">
-                                <label class="form-label">Password</label>
-                                <input
-                                    :class="{
-                                        'border-danger' : v.formData.password.$error
-                                            || vuelidateExternalResults.formatData.password.length !== 0
-                                    }"
-                                    v-model="formData.password"
-                                    v-on:input="formInputChanged"
-                                    type="password"
-                                    name="password"
-                                    class="form-control"
-                                >
-                                <div class="text-danger fs-7" v-if="v.formData.password.required.$invalid">
-                                    <span>This field if required</span>
-                                </div>
-                                <div class="text-danger fs-7" v-else-if="v.formData.password.$error">
-                                    Min length is {{ v.formData.password.minLength.$params.min }}
-                                    and max length is {{ v.formData.password.maxLength.$params.max }}
-                                </div>
-                                <span
-                                    class="text-danger fs-7"
-                                    v-if="vuelidateExternalResults.formatData.password.length !== 0"
-                                >
+
+                            <span
+                                class="text-danger fs-7"
+                                v-if="vuelidateExternalResults.formatData.password.length !== 0"
+                            >
                                         {{ vuelidateExternalResults.formatData.password[0] }}
-                                </span>
-                            </div>
+                            </span>
+
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
                     </div>
@@ -153,7 +134,11 @@ export default {
         formInputChanged () {
             this.v.$clearExternalResults();
         },
-    },
+        capitalizeFirstLetter(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+
+},
     mounted() {
 
     }

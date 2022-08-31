@@ -1,8 +1,8 @@
 <template>
     <div>
         <div class="d-flex">
-            <button v-on:click="openModal" type="button" class="d-flex btn btn-link">
-                Sign up
+            <button v-on:click="openModal" type="button" class="d-flex btn btn-link link-dark">
+                Login in
             </button>
         </div>
 
@@ -10,18 +10,58 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Sign up</h5>
+                        <h5 class="modal-title">Login in</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <form @submit.prevent="submitForm" action="#" class="container-sm w-50 my-3">
                             <div class="mb-3">
-                                <label class="form-label">Email</label>
-                                <input v-model="formData.email" type="text" name="email" class="form-control" placeholder="name@example.com">
+                                <label class="form-label">Login</label>
+                                <input
+                                    v-model="formData.email"
+                                    :class="{
+                                        'border-danger' : v.formData.email.$error
+                                            || vuelidateExternalResults.formatData.password.length !== 0
+                                    }"
+                                    type="text" name="email"
+                                    class="form-control"
+                                    placeholder="name@example.com"
+                                    v-on:input="formInputChanged"
+                                >
+                                <div class="text-danger fs-7" v-if="v.formData.email.required.$invalid">
+                                    <span>This field if required</span>
+                                </div>
+                                <div class="text-danger fs-7" v-else-if="v.formData.email.$error">
+                                    Min length is {{ v.formData.email.minLength.$params.min }}
+                                    and max length is {{ v.formData.email.maxLength.$params.max }}
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Password</label>
-                                <input v-model="formData.password" type="password" name="password" class="form-control">
+                                <input
+                                    :class="{
+                                        'border-danger' : v.formData.password.$error
+                                            || vuelidateExternalResults.formatData.password.length !== 0
+                                    }"
+                                    v-model="formData.password"
+                                    v-on:input="formInputChanged"
+                                    type="password"
+                                    name="password"
+                                    class="form-control"
+                                >
+                                <div class="text-danger fs-7" v-if="v.formData.password.required.$invalid">
+                                    <span>This field if required</span>
+                                </div>
+                                <div class="text-danger fs-7" v-else-if="v.formData.password.$error">
+                                    Min length is {{ v.formData.password.minLength.$params.min }}
+                                    and max length is {{ v.formData.password.maxLength.$params.max }}
+                                </div>
+                                <span
+                                    class="text-danger fs-7"
+                                    v-if="vuelidateExternalResults.formatData.password.length !== 0"
+                                >
+                                        {{ vuelidateExternalResults.formatData.password[0] }}
+                                </span>
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
@@ -35,12 +75,15 @@
 
 <script>
 import useVuelidate from '@vuelidate/core'
-import { required, email, minLength, maxLength } from '@vuelidate/validators'
+import { required,  email, minLength, maxLength } from '@vuelidate/validators'
+
 
 export default {
-    name: "email",
+    name: "Login",
     props: ['user-data'],
-    setup: () => ({ v$: useVuelidate() }),
+    setup: () => ({
+        v: useVuelidate()
+    }),
     validations () {
         return {
             formData: {
@@ -53,8 +96,9 @@ export default {
                     required,
                     minLength: minLength(4),
                     maxLength: maxLength(40)
-                }
-            }
+                },
+            },
+
         }
     },
 
@@ -65,22 +109,27 @@ export default {
                 password: "",
             },
             loginModal: {},
+            vuelidateExternalResults: {
+                formatData: {
+                    password: []
+                },
+            }
         }
     },
     methods: {
         async submitForm() {
-            let validated = await this.checkRules();
+            let validated = await this.v.$validate();
             if(validated) {
                 axios.get('/sanctum/csrf-cookie').then(response => {
                     axios.post('/login', this.formData)
                         .then(response => {
                             this.closeModal();
+                            window.location.reload();
                         })
                         .catch((error => {
                             if(error.response.status === 422) {
-                                this.showError();
+                                this.showServerValidationError();
                             }
-                            console.log(error.response.status);
                         }));
                 });
             }
@@ -93,18 +142,17 @@ export default {
         closeModal() {
             this.loginModal.hide();
         },
-        showError() {
-            alert("Error");
+        showServerValidationError() {
+            const errors = {
+                formatData: {
+                    password: ['Login or password is incorrect']
+                }
+            };
+            Object.assign(this.vuelidateExternalResults, errors)
         },
-        async checkRules() {
-            const result = await this.v$.$validate();
-            if (!result) {
-                console.log("invalid data");
-                return false;
-            }
-            console.log("valid data");
-            return true;
-        }
+        formInputChanged () {
+            this.v.$clearExternalResults();
+        },
     },
     mounted() {
 
@@ -113,5 +161,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

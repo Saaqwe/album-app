@@ -21794,6 +21794,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     formInputChanged: function formInputChanged() {
       this.v.$clearExternalResults();
+    },
+    capitalizeFirstLetter: function capitalizeFirstLetter(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
     }
   },
   mounted: function mounted() {}
@@ -21848,57 +21851,30 @@ var _hoisted_6 = {
 var _hoisted_7 = {
   "class": "mb-3"
 };
-
-var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+var _hoisted_8 = {
   "class": "form-label"
-}, "Login", -1
-/* HOISTED */
-);
-
-var _hoisted_9 = {
+};
+var _hoisted_9 = ["onUpdate:modelValue", "type", "name"];
+var _hoisted_10 = {
   key: 0,
   "class": "text-danger fs-7"
 };
 
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "This field if required", -1
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "This field if required", -1
 /* HOISTED */
 );
 
-var _hoisted_11 = [_hoisted_10];
-var _hoisted_12 = {
-  key: 1,
-  "class": "text-danger fs-7"
-};
+var _hoisted_12 = [_hoisted_11];
 var _hoisted_13 = {
-  "class": "mb-3"
+  key: 1,
+  "class": "text-danger fs-7"
 };
-
-var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-  "class": "form-label"
-}, "Password", -1
-/* HOISTED */
-);
-
-var _hoisted_15 = {
+var _hoisted_14 = {
   key: 0,
   "class": "text-danger fs-7"
 };
 
-var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "This field if required", -1
-/* HOISTED */
-);
-
-var _hoisted_17 = [_hoisted_16];
-var _hoisted_18 = {
-  key: 1,
-  "class": "text-danger fs-7"
-};
-var _hoisted_19 = {
-  key: 2,
-  "class": "text-danger fs-7"
-};
-
-var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
   type: "submit",
   "class": "btn btn-primary"
 }, "Submit", -1
@@ -21913,47 +21889,36 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     type: "button",
     "class": "d-flex btn btn-link link-dark"
   }, " Login in ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
-    onSubmit: _cache[5] || (_cache[5] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+    onSubmit: _cache[2] || (_cache[2] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.submitForm && $options.submitForm.apply($options, arguments);
     }, ["prevent"])),
     action: "#",
     "class": "container-sm w-50 my-3"
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
-      return $data.formData.email = $event;
-    }),
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([{
-      'border-danger': _ctx.v.formData.email.$error || $data.vuelidateExternalResults.formatData.password.length !== 0
-    }, "form-control"]),
-    type: "text",
-    name: "email",
-    placeholder: "name@example.com",
-    onInput: _cache[2] || (_cache[2] = function () {
-      return $options.formInputChanged && $options.formInputChanged.apply($options, arguments);
-    })
-  }, null, 34
-  /* CLASS, HYDRATE_EVENTS */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.formData.email]]), _ctx.v.formData.email.required.$invalid ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_9, _hoisted_11)) : _ctx.v.formData.email.$error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_12, " Min length is " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.v.formData.email.minLength.$params.min) + " and max length is " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.v.formData.email.maxLength.$params.max), 1
+  }, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.formData, function (value, inputName) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.capitalizeFirstLetter(inputName)), 1
+    /* TEXT */
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([{
+        'border-danger': _ctx.v.formData[inputName].$error || $data.vuelidateExternalResults.formatData.password.length !== 0
+      }, "form-control"]),
+      "onUpdate:modelValue": function onUpdateModelValue($event) {
+        return $data.formData[inputName] = $event;
+      },
+      onInput: _cache[1] || (_cache[1] = function () {
+        return $options.formInputChanged && $options.formInputChanged.apply($options, arguments);
+      }),
+      type: inputName,
+      name: inputName
+    }, null, 42
+    /* CLASS, PROPS, HYDRATE_EVENTS */
+    , _hoisted_9), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelDynamic, $data.formData[inputName]]]), _ctx.v.formData[inputName].required.$invalid ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_10, _hoisted_12)) : _ctx.v.formData[inputName].$error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_13, " Min length is " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.v.formData[inputName].minLength.$params.min) + " and max length is " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.v.formData[inputName].maxLength.$params.max), 1
+    /* TEXT */
+    )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
+  }), 256
+  /* UNKEYED_FRAGMENT */
+  )), $data.vuelidateExternalResults.formatData.password.length !== 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.vuelidateExternalResults.formatData.password[0]), 1
   /* TEXT */
-  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [_hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([{
-      'border-danger': _ctx.v.formData.password.$error || $data.vuelidateExternalResults.formatData.password.length !== 0
-    }, "form-control"]),
-    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
-      return $data.formData.password = $event;
-    }),
-    onInput: _cache[4] || (_cache[4] = function () {
-      return $options.formInputChanged && $options.formInputChanged.apply($options, arguments);
-    }),
-    type: "password",
-    name: "password"
-  }, null, 34
-  /* CLASS, HYDRATE_EVENTS */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.formData.password]]), _ctx.v.formData.password.required.$invalid ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_15, _hoisted_17)) : _ctx.v.formData.password.$error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_18, " Min length is " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.v.formData.password.minLength.$params.min) + " and max length is " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.v.formData.password.maxLength.$params.max), 1
-  /* TEXT */
-  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.vuelidateExternalResults.formatData.password.length !== 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.vuelidateExternalResults.formatData.password[0]), 1
-  /* TEXT */
-  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), _hoisted_20], 32
+  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_15], 32
   /* HYDRATE_EVENTS */
   )])])])], 512
   /* NEED_PATCH */
