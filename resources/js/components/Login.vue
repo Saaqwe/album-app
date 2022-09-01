@@ -11,7 +11,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Login in</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button v-on:click.prevent="closeModal" type="button" class="btn-close"></button>
                     </div>
                     <div class="modal-body">
                         <form @submit.prevent="submitForm" action="#" class="container-sm w-50 my-3">
@@ -28,7 +28,11 @@
                                     :name='inputName'
                                     class="form-control"
                                 >
-                                <div class="text-danger fs-7" v-if="v.formData[inputName].required.$invalid">
+                                <div
+                                    class="text-danger fs-7"
+                                    v-if="v.formData[inputName].required.$invalid
+                                        && v.formData[inputName].$dirty"
+                                >
                                     <span>This field if required</span>
                                 </div>
                                 <div class="text-danger fs-7" v-else-if="v.formData[inputName].$error">
@@ -121,6 +125,10 @@ export default {
             this.loginModal.show();
         },
         closeModal() {
+            for (const [key, value] of Object.entries(this.formData)) {
+                this.formData[key] = '';
+            }
+            this.v.$reset();
             this.loginModal.hide();
         },
         showServerValidationError() {

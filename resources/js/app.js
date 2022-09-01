@@ -1,3 +1,5 @@
+import Registration from "./components/Registration";
+
 require('./bootstrap');
 // window.bootstrap = require('bootstrap');
 window.bootstrap = require('bootstrap/dist/js/bootstrap.bundle.js');
@@ -14,6 +16,7 @@ const header = createApp({
     },
     components: {
         'login' : Login,
+        'registration' : Registration
 
     },
     mounted() {

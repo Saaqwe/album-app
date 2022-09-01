@@ -21,6 +21,7 @@
     <x-header.user></x-header.user>
     @else
         <login></login>
+        <registration></registration>
     @endif
 {{--    @unless (Auth::check())--}}
 {{--        <login></login>--}}
