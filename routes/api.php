@@ -20,5 +20,7 @@ Route::middleware('auth:sanctum')->group(function () {
         return new UserResource(User::findOrFail($id));
     });
 });
+Route::apiResource('articles', \App\Http\Controllers\ArticleController::class);
+
 
 

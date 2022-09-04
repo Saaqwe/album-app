@@ -11,10 +11,7 @@
     <div class="middle-column">
         <div class="search">
         </div>
-        <button class="btn btn-light" type="button">
-            <i class="bi bi-plus-lg"></i>
-            Create
-        </button>
+        <article-add-modal></article-add-modal>
     </div>
     @if(Auth::check())
 {{--        <x-user-header></x-user-header>--}}
@@ -41,5 +38,3 @@
     });
 </script>
 </html>
-<script type="module">
-</script>

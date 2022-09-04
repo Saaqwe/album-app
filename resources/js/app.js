@@ -7,6 +7,7 @@ window.bootstrap = require('bootstrap/dist/js/bootstrap.bundle.js');
 require('vue')
 import { createApp } from 'vue'
 import Login from "./components/Login";
+import ArticleAddModal from "./components/ArticleAddModal";
 
 const header = createApp({
     data() {
@@ -16,7 +17,8 @@ const header = createApp({
     },
     components: {
         'login' : Login,
-        'registration' : Registration
+        'registration' : Registration,
+        'article-add-modal' : ArticleAddModal
 
     },
     mounted() {
