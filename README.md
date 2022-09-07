@@ -1,1 +1,1 @@
-<h1>Article-app</h1>
+<h1>Album-app</h1>
