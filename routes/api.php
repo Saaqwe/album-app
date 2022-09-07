@@ -19,6 +19,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('albums', [\App\Http\Controllers\AlbumController::class, 'store']);
     Route::put('albums/{id}', [\App\Http\Controllers\AlbumController::class, 'update']);
     Route::post('album_info', [\App\Http\Controllers\LastFMController::class, 'showAlbumData']);
+    Route::delete('albums/{id}', [\App\Http\Controllers\AlbumController::class, 'destroy']);
 });
 
 

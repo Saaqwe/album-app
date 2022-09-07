@@ -21874,8 +21874,6 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     axios.post('/api/albums/all').then(function (res) {
-      console.log("succeds");
-      console.log(res);
       res['data'].forEach(function (album) {
         _this.albumArray.push({
           title: album.title,
@@ -21885,10 +21883,7 @@ __webpack_require__.r(__webpack_exports__);
           id: album.id
         });
       });
-    })["catch"](function (error) {
-      console.log("error");
-      console.log(error);
-    });
+    })["catch"](function (error) {});
   },
   methods: {
     albumUpdate: function albumUpdate(data) {
@@ -21900,7 +21895,18 @@ __webpack_require__.r(__webpack_exports__);
       chnagedAlbum.author = data.author;
       chnagedAlbum.imageSrc = data.imageSrc;
     },
-    setAlbumData: function setAlbumData() {}
+    deleteAlbum: function deleteAlbum(id, index) {
+      var _this2 = this;
+
+      axios["delete"]("/api/albums/".concat(id)).then(function (res) {
+        // let chnagedAlbum = this.albumArray.find(album => album.id === data.id);
+        // let chnagedAlbum = myArray.filter(function( obj ) {
+        //     return obj.id !== id;
+        // });
+        // this.albumArray = chnagedAlbum;
+        _this2.albumArray.splice(index, 1);
+      })["catch"](function (error) {});
+    }
   },
   albumUpdate: function albumUpdate() {
     alert("HAAAAAAAAAy");
@@ -22684,10 +22690,17 @@ var _hoisted_10 = {
 var _hoisted_11 = {
   "class": "card-text"
 };
+var _hoisted_12 = {
+  "class": "d-flex"
+};
+var _hoisted_13 = {
+  "class": "d-flex ms-1"
+};
+var _hoisted_14 = ["onClick"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_album_edit_modal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("album-edit-modal");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.albumArray, function (album) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.albumArray, function (album, index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
       src: album.imageSrc,
       "class": "card-img-top",
@@ -22700,7 +22713,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* TEXT */
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(album.description), 1
     /* TEXT */
-    ), $props.userAuthenticated ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_album_edit_modal, {
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [$props.userAuthenticated ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_album_edit_modal, {
       key: 0,
       "old-author": album.author,
       "old-title": album.title,
@@ -22712,7 +22725,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       })
     }, null, 8
     /* PROPS */
-    , ["old-author", "old-title", "old-image-src", "old-description", "id"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])]);
+    , ["old-author", "old-title", "old-image-src", "old-description", "id"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [$props.userAuthenticated ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", {
+      key: 0,
+      onClick: function onClick($event) {
+        return $options.deleteAlbum(album.id, index);
+      },
+      href: "#",
+      "class": "btn btn-primary"
+    }, "Delete", 8
+    /* PROPS */
+    , _hoisted_14)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])])])]);
   }), 256
   /* UNKEYED_FRAGMENT */
   ))])])]);

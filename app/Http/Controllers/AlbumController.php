@@ -35,8 +35,6 @@ class AlbumController extends Controller
         ]);
         $validatedFields['offset'] = $validatedFields['offset'] ?? 0;
         $albums = Album::orderBy('created_at')
-//            ->skip($validatedFields['offset'])
-//            ->take(10)
             ->get();
         return response()->json($albums);
     }
@@ -48,7 +46,8 @@ class AlbumController extends Controller
      * @param string $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, string $id) {
+    public function update(Request $request, string $id)
+    {
         $validatedFields = $request->validate([
             'title' => 'required|string|max:255',
             'artist' => 'required|string|max:255',
@@ -64,5 +63,14 @@ class AlbumController extends Controller
         Log::info("Album with id " . $album['id'] . " and name "
             . $album['title'] . " update");
         return response()->json();
+    }
+
+    public function destroy($id)
+    {
+        $album = Album::find(intval($id));
+        $album->delete();
+        Log::info("Album with id " . $album['id'] . " and name "
+            . $album['title'] . " deleted");
+        response()->json();
     }
 }
