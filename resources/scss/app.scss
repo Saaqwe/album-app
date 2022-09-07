@@ -12,13 +12,15 @@ $font-sizes: (
 // Объедините карты
 //$theme-colors: map-merge($theme-colors, $custom-colors);
 
+$middle-width: 640px;
+
 .header{
     height: 60px;
     background-color: #FFDDEF;
     display: flex;
     align-items: center;
     .middle-column{
-        max-width: 640px;
+        max-width: $middle-width;
         margin: auto;
         display: flex;
         padding: 10px;

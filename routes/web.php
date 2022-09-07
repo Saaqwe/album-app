@@ -25,23 +25,19 @@ Route::get('/', function () {
 Route::name('user.')->group(function () {
 
 
-    Route::get('login', [LoginController::class, 'index']);
+    Route::get('login', [LoginController::class, 'index'])->name('login');
 
     Route::post('/login', [LoginController::class, 'login']);
 
     Route::match(array('GET','POST'),'logout',[LoginController::class, 'logout']);
 
-//    Route::post('/logout', [LoginController::class, 'logout']);
+    Route::get('create_album', function () {
+       return view('album_create_page');
+    })->middleware('auth');
 
-
-//    Route::get('/logout', function() {
-//        Auth::logout();
-//        return redirect("/");
-//    })->name('logout');
-
-    Route::view('/private', 'private')
-        ->middleware('auth')->name('private');
-
+    Route::get('albums', function () {
+        return view('album_page');
+    });
 
     Route::get('registration', function () {
         if(Auth::check()) {

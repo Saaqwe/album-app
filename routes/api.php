@@ -16,11 +16,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/profile/{id}', function ($id) {
-        return new UserResource(User::findOrFail($id));
-    });
+    Route::post('albums', [\App\Http\Controllers\AlbumController::class, 'store']);
+    Route::put('albums/{id}', [\App\Http\Controllers\AlbumController::class, 'update']);
+    Route::post('album_info', [\App\Http\Controllers\LastFMController::class, 'showAlbumData']);
 });
-Route::apiResource('articles', \App\Http\Controllers\ArticleController::class);
+
+
+Route::post('albums/all', [\App\Http\Controllers\AlbumController::class, 'showAll']);
+
 
 
 

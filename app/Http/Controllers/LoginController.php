@@ -14,7 +14,7 @@ class LoginController extends Controller
     public function index()
     {
         if(Auth::check()) {
-            return redirect(route('user.private'));
+            return redirect(route('albums'));
         } else {
             return view('login');
         }
@@ -27,11 +27,11 @@ class LoginController extends Controller
         } else {
             $formFields = $request->only(['email', 'password']);
             if(Auth::check()) {
-                return redirect()->intended(route('private'));
+                return redirect()->intended(route('albums'));
             }
             if(Auth::attempt($formFields)) {
                 $request->session()->regenerate();
-                return redirect()->intended('private');
+                return redirect()->intended('albums');
             } else {
                 return redirect(route('user.login'))->withErrors([
                     'formError' => "Не удалось авторизоваться"
@@ -45,7 +45,7 @@ class LoginController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/');
+        return redirect('/albums');
     }
 
 

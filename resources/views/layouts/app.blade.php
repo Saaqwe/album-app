@@ -11,11 +11,10 @@
     <div class="middle-column">
         <div class="search">
         </div>
-        <article-add-modal></article-add-modal>
+{{--        <article-add-modal></article-add-modal>--}}
     </div>
     @if(Auth::check())
-{{--        <x-user-header></x-user-header>--}}
-    <x-header.user></x-header.user>
+        <x-header.user></x-header.user>
     @else
         <login></login>
         <registration></registration>
